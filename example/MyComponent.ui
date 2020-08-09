@@ -1,31 +1,20 @@
-
-state editing: boolean = false
+use component Container, Spacer, Avatar
+use controllers Auth, Accounts 
 
 component main App {
+    state enable: boolean = true
     @mounted accounts.load, FadeIn
     MyForm {
-        @enabled = editing;
+        @enabled = enable;
     }
 }
 // define a new component
 component MyForm {
 	prop enabled?: boolean = true
-    style FormContainerStyle {
-        margin: 10 5 mobile(5 2) tablet(5 2), 
-        maxWidth: 200
-        shadow: 0, 0, 200 theme.shadow
-    }
     Container FormContainerStyle {  
-        style InputStyle {
-            @onFocus editing = true
-            @onBlur editing = false
-            borderRadius: 5
-            margin: 10 5 mobile(5 2) tablet(5 2)
-            background: theme.inputBackground
-        }
         Input InputStyle {
             @email "Email Here"
-            @state auth.CREDS.email
+            @state Auth.CREDS.email
             Icon {
                 @svg "email"
                 @size 22
@@ -33,36 +22,44 @@ component MyForm {
         }
         Input InputStyle {
             @password
-            @state auth.CREDS.password
+            @state Auth.CREDS.password
         }
         Button {
+            style padding: 10 20, center, grow, background: theme.background
             @text "Submit"
-            @style padding: 10 20, center, grow, background: theme.background
-            @action wait if (enabled) auth.CREDS.email
+            @action wait if (enabled) Auth.CREDS.email
             if (waiting) Spinner SpinnerStyle {}
         }
 	}
 }
 
-animation FadeIn {
+global style FormContainerStyle {
+    margin: 5 mobile(0) tablet(3)
+    maxWidth: 200
+    shadow: 0, 0, 200 theme.shadow
+    spaceBetween: 10
+}
+global style InputStyle {
+    padding: 10 5
+    borderRadius: 5
+    background: theme.inputBackground
+}
+
+global animation FadeIn {
     @duration = 200
     @frame opacity = 0
     @frame opacity = 1
 }
 
+// computed notEditing: boolean => !editing
 
+// define global object AccountObject {
+//     id: string
+//     email: string
+// }
 
-
-
-
-computed notEditing: boolean => !editing
-
-object AccountObject {
-    id: string
-    email: string
-}
-collection Accounts {
-    @groups define AUTHED, FAVORITES
-    @selectors define CURRENT
-    @data AccountObject
-}
+// define global collection Accounts {
+//     @groups define AUTHED, FAVORITES
+//     @selectors define CURRENT
+//     @data AccountObject
+// }
