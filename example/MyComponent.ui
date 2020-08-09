@@ -1,4 +1,4 @@
-use component Container, Spacer, Avatar
+use component Container, Input, Button, Icon
 use controllers Auth, Accounts 
 
 component main App {
@@ -33,24 +33,26 @@ component MyForm {
 	}
 }
 
-global style FormContainerStyle {
+style FormContainerStyle {
     margin: 5 mobile(0) tablet(3)
     maxWidth: 200
     shadow: 0, 0, 200 theme.shadow
     spaceBetween: 10
 }
 
-global style InputStyle {
+style InputStyle {
     padding: 10 5
     borderRadius: 5
     background: theme.inputBackground
 }
 
-global animation FadeIn {
+animation FadeIn {
     @duration = 200
     @frame opacity = 0
     @frame opacity = 1
 }
+
+
 
 // computed notEditing: boolean => !editing
 

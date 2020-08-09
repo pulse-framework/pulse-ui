@@ -11,12 +11,12 @@ patterns:
     captures:
       '0': { name: punctuation.definition.comment.html }
 
-  # # Boolean
-  # - name: boolean.ui
-  #   begin: (true|false)
-  #   end: \s
-  #   captures:
-  #     '0': { name: constant.numeric }
+  # Boolean
+  - name: boolean.ui
+    begin: (true|false)
+    end: \s
+    captures:
+      '0': { name: constant.numeric }
 
       # Component Name
   - name: component.block.ui
