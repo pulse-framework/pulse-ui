@@ -8,7 +8,7 @@ component main App {
         @enabled = enable;
     }
 }
-// define a new component
+
 component MyForm {
 	prop enabled?: boolean = true
     Container FormContainerStyle {  
@@ -39,6 +39,7 @@ global style FormContainerStyle {
     shadow: 0, 0, 200 theme.shadow
     spaceBetween: 10
 }
+
 global style InputStyle {
     padding: 10 5
     borderRadius: 5
