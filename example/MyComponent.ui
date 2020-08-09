@@ -1,5 +1,5 @@
-use component Container, Input, Button, Icon
-use controllers Auth, Accounts 
+use pulse::component { Container, Input, Button, Icon }
+use core::controller { Auth, Accounts }
 
 component main App {
     state enable: boolean = true
@@ -8,12 +8,11 @@ component main App {
         @enabled = enable;
     }
 }
-
 component MyForm {
 	prop enabled?: boolean = true
     Container FormContainerStyle {  
         Input InputStyle {
-            @email "Email Here"
+            @email true, "Email Here"
             @state Auth.CREDS.email
             Icon {
                 @svg "email"
@@ -21,14 +20,14 @@ component MyForm {
             }
         }
         Input InputStyle {
-            @password
+            @password true
             @state Auth.CREDS.password
         }
         Button {
-            style padding: 10 20, center, grow, background: theme.background
             @text "Submit"
-            @action wait if (enabled) Auth.CREDS.email
-            if (waiting) Spinner SpinnerStyle {}
+            @onPress if enabled Auth.CREDS.email
+            @style padding: 10 20, center, grow, background: theme.background
+            if waiting Spinner SpinnerStyle {}
         }
 	}
 }
@@ -36,7 +35,7 @@ component MyForm {
 style FormContainerStyle {
     margin: 5 mobile(0) tablet(3)
     maxWidth: 200
-    shadow: 0, 0, 200 theme.shadow
+    shadow: 0 0 200 theme.shadow
     spaceBetween: 10
 }
 
@@ -47,9 +46,18 @@ style InputStyle {
 }
 
 animation FadeIn {
-    @duration = 200
-    @frame opacity = 0
-    @frame opacity = 1
+    @duration 200
+    @frame opacity 0
+    @frame opacity 1
+}
+
+component SomethingElse {
+    @class "some-custom-classname"
+    @touchable pressOpacity: 0.5
+    View MyStyle {
+        @style row, cornerRadius: 4, fill: theme.box
+
+    }
 }
 
 

@@ -34,13 +34,10 @@ patterns:
 
   # Initializer Keyword 
   - name: keyword.declaration.ui
-    begin: (prop|if|component|style|state|mobile:|animation|main|computed|object|define|global|use|controllers)
+    begin: (prop|if|component|style|state|mobile:|animation|main|computed|object|define|global|use|controllers|onPress|float|controller)
     end: \s
     captures:
       '0': { name: keyword.control.ui }
-
-
-
 
   # Component Input
   - name: component.input.ui
@@ -49,12 +46,12 @@ patterns:
     captures:
       '0': { name: entity.name.class }
 
-  # Wait
-  - name: component.wait.ui
-    begin: (waiting|wait)
-    end: \s
-    captures:
-      '0': { name: entity.name.class }
+  # # Wait
+  # - name: component.await.ui
+  #   begin: (waiting|await)
+  #   end: \s
+  #   captures:
+  #     '0': { name: entity.name.class }
 
 
  # Integers
