@@ -1,0 +1,38 @@
+
+state editing: boolean = false
+
+// define a new component
+component MyForm {
+	prop enabled?: boolean = true
+    Container { 
+        Input InputStyle {
+            @state auth.CREDS.email
+            @default "Email Here"
+        }
+        Input InputStyle {
+            @state auth.CREDS.password
+        }
+        Button {
+            @style padding: 10 20, center, flex
+            @action if (enabled) auth.CREDS.email
+            @text "Submit"
+        }
+	}
+}
+
+component
+
+component App {
+    MyForm {
+        @
+    }
+}
+
+style InputStyle {
+    @onFocus: editing = true;
+    @onBlur: editing = false;
+	borderRadius: 5;
+	margin: 10 5 @mobile 5 2.5;
+	background: theme.background;
+}
+

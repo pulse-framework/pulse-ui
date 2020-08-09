@@ -1,0 +1,65 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+name: Pulse UI
+scopeName: source.pulse
+fileTypes: [ui]
+patterns:
+
+  # Comment 
+  - name: comment.block.ui
+    begin: //
+    end: \n
+    captures:
+      '0': { name: punctuation.definition.comment.html }
+
+  # Boolean
+  - name: boolean.ui
+    begin: (true|false)
+    end: \s
+    captures:
+      '0': { name: constant.numeric }
+
+      # Component Name
+  - name: component.block.ui
+    begin: ([A-Z][a-zA-Z]+).+{
+    end: \s
+    captures:
+      '1': { name: entity.name.function }
+
+  # Initializer Keyword 
+  - name: keyword.declaration.ui
+    begin: (prop|if|component|style|state)
+    end: \s
+    captures:
+      '0': { name: keyword.control.ui }
+
+
+
+  # Component Input
+  - name: component.input.ui
+    begin: (@[a-zA-Z]+)
+    end: \s
+    captures:
+      '0': { name: entity.name.class }
+
+ # Integers
+  - name: integer.ui
+    begin: \d+
+    end: \s
+    captures:
+      '0': { name: constant.numeric }
+
+ # Type declaration
+  - name: type.declaration.ui
+    begin: :\s(boolean|string|number)
+    end: \s
+    captures:
+      '1': { name: entity.name.class }
+
+   #  String
+  - name: string.quoted.double.ui
+    begin: '"'
+    beginCaptures:
+      '0': { name: punctuation.definition.string.begin.html }
+    end: '"'
+    endCaptures:
+      '0': { name: punctuation.definition.string.end.html }

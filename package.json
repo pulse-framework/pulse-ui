@@ -1,0 +1,40 @@
+{
+    "name": "pulse-ui",
+    "displayName": "Pulse UI",
+    "description": "UI Templating Lang for React, React Native & React Native Web",
+    "version": "0.0.1",
+    "scripts": {
+        "start" : "npx js-yaml syntaxes/ui.tmLanguage.yaml > syntaxes/ui.tmLanguage.json"
+    },
+    "engines": {
+        "vscode": "^1.47.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "ui",
+                "aliases": [
+                    "Pulse UI",
+                    "ui"
+                ],
+                "extensions": [
+                    ".ui"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ui",
+                "scopeName": "source.pulse",
+                "path": "./syntaxes/ui.tmLanguage.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "js-yaml": "^3.14.0"
+    }
+}
