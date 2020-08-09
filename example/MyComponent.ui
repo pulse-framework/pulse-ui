@@ -1,38 +1,68 @@
 
 state editing: boolean = false
 
+component main App {
+    @mounted accounts.load, FadeIn
+    MyForm {
+        @enabled = editing;
+    }
+}
 // define a new component
 component MyForm {
 	prop enabled?: boolean = true
-    Container { 
-        Input InputStyle {
-            @state auth.CREDS.email
-            @default "Email Here"
+    style FormContainerStyle {
+        margin: 10 5 mobile(5 2) tablet(5 2), 
+        maxWidth: 200
+        shadow: 0, 0, 200 theme.shadow
+    }
+    Container FormContainerStyle {  
+        style InputStyle {
+            @onFocus editing = true
+            @onBlur editing = false
+            borderRadius: 5
+            margin: 10 5 mobile(5 2) tablet(5 2)
+            background: theme.inputBackground
         }
         Input InputStyle {
+            @email "Email Here"
+            @state auth.CREDS.email
+            Icon {
+                @svg "email"
+                @size 22
+            }
+        }
+        Input InputStyle {
+            @password
             @state auth.CREDS.password
         }
         Button {
-            @style padding: 10 20, center, flex
-            @action if (enabled) auth.CREDS.email
             @text "Submit"
+            @style padding: 10 20, center, grow, background: theme.background
+            @action wait if (enabled) auth.CREDS.email
+            if (waiting) Spinner SpinnerStyle {}
         }
 	}
 }
 
-component
-
-component App {
-    MyForm {
-        @
-    }
+animation FadeIn {
+    @duration = 200
+    @frame opacity = 0
+    @frame opacity = 1
 }
 
-style InputStyle {
-    @onFocus: editing = true;
-    @onBlur: editing = false;
-	borderRadius: 5;
-	margin: 10 5 @mobile 5 2.5;
-	background: theme.background;
-}
 
+
+
+
+
+computed notEditing: boolean => !editing
+
+object AccountObject {
+    id: string
+    email: string
+}
+collection Accounts {
+    @groups define AUTHED, FAVORITES
+    @selectors define CURRENT
+    @data AccountObject
+}

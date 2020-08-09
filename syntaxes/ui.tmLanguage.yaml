@@ -25,9 +25,16 @@ patterns:
     captures:
       '1': { name: entity.name.function }
 
+# State Name
+  - name: component.block.ui
+    begin: ([A-Z][A-Z]+)
+    end: \s
+    captures:
+      '1': { name: constant.numeric }
+
   # Initializer Keyword 
   - name: keyword.declaration.ui
-    begin: (prop|if|component|style|state)
+    begin: (prop|if|component|style|state|mobile:|animation|main|computed|collection|object|define)
     end: \s
     captures:
       '0': { name: keyword.control.ui }
@@ -41,9 +48,17 @@ patterns:
     captures:
       '0': { name: entity.name.class }
 
+  # Wait
+  - name: component.wait.ui
+    begin: (waiting|wait)
+    end: \s
+    captures:
+      '0': { name: entity.name.class }
+
+
  # Integers
   - name: integer.ui
-    begin: \d+
+    begin: \d+|=>
     end: \s
     captures:
       '0': { name: constant.numeric }
