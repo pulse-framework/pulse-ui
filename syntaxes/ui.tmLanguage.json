@@ -47,7 +47,7 @@
     },
     {
       "name": "keyword.declaration.ui",
-      "begin": "(prop|if|component|style|state|mobile:|animation|main|computed|object|define|global|use|controllers|onPress|float|controller)",
+      "begin": "(prop|if|else|component|style|state|mobile:|animation|main|computed|object|define|global|use|controllers|onPress|float|controller)",
       "end": "\\s",
       "captures": {
         "0": {
@@ -62,6 +62,16 @@
       "captures": {
         "0": {
           "name": "entity.name.class"
+        }
+      }
+    },
+    {
+      "name": "function.call.ui",
+      "begin": "([a-zA-Z]+)\\(\\)",
+      "end": "\\s",
+      "captures": {
+        "1": {
+          "name": "entity.name.function"
         }
       }
     },

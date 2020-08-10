@@ -1,17 +1,19 @@
-use pulse::component { Container, Input, Button, Icon }
+use pulse::component { Container, Input, Button, Icon, Text, Logo }
 use core::controller { Auth, Accounts }
 
 component main App {
     state enable: boolean = true
-    @mounted accounts.load, FadeIn
+    @mount accounts.load, FadeIn
     MyForm {
-        @enabled = enable;
+     @enabled = enable;
     }
 }
 component MyForm {
 	prop enabled?: boolean = true
-    Container FormContainerStyle {  
-        Input InputStyle {
+    Container FormContainerStyle {
+        Logo->LogoRef LogoStyle {}
+        Text h1 bold moniker { "Something cool here..." }
+        Input InputStyle { 
             @email true, "Email Here"
             @state Auth.CREDS.email
             Icon {
@@ -23,11 +25,14 @@ component MyForm {
             @password true
             @state Auth.CREDS.password
         }
-        Button {
+        Button ButtonStyle {
             @text "Submit"
-            @onPress if enabled Auth.CREDS.email
-            @style padding: 10 20, center, grow, background: theme.background
-            if waiting Spinner SpinnerStyle {}
+            @onPress if enabled Auth.CREDS.email else shake()
+            @style padding: 10 20, center, grow, background: theme.accent
+            if waiting {
+                Spinner SpinnerStyle {}
+                LogoRef.Animate()
+            }
         }
 	}
 }
