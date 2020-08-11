@@ -34,7 +34,7 @@ patterns:
 
   # Initializer Keyword 
   - name: keyword.declaration.ui
-    begin: (prop|if|component|style|state|mobile:|animation|main|computed|object|define|global|use|controllers)
+    begin: (prop|if|component|style|switch|case|state|mobile:|animation|main|computed|object|define|global|use|controllers)
     end: \s
     captures:
       '0': { name: keyword.control.ui }
@@ -65,6 +65,13 @@ patterns:
       '0': { name: constant.numeric }
 
  # Type declaration
+  - name: type.declaration.ui
+    begin: :?\s(boolean|string|number)
+    end: \s
+    captures:
+      '1': { name: entity.name.class }
+  
+   # Type declaration
   - name: type.declaration.ui
     begin: :\s(boolean|string|number)
     end: \s

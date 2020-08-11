@@ -16,6 +16,16 @@
       }
     },
     {
+      "name": "boolean.ui",
+      "begin": "(true|false)",
+      "end": "\\s",
+      "captures": {
+        "0": {
+          "name": "constant.numeric"
+        }
+      }
+    },
+    {
       "name": "component.block.ui",
       "begin": "([A-Z][a-zA-Z]+).+{",
       "end": "\\s",
@@ -37,7 +47,7 @@
     },
     {
       "name": "keyword.declaration.ui",
-      "begin": "(prop|if|component|style|state|mobile:|animation|main|computed|object|define|global|use|controllers)",
+      "begin": "(prop|if|component|style|switch|case|state|mobile:|animation|main|computed|object|define|global|use|controllers)",
       "end": "\\s",
       "captures": {
         "0": {
@@ -72,6 +82,16 @@
       "captures": {
         "0": {
           "name": "constant.numeric"
+        }
+      }
+    },
+    {
+      "name": "type.declaration.ui",
+      "begin": ":?\\s(boolean|string|number)",
+      "end": "\\s",
+      "captures": {
+        "1": {
+          "name": "entity.name.class"
         }
       }
     },

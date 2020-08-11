@@ -1,36 +1,69 @@
 use component Container, Input, Button, Icon
 use controllers Auth, Accounts 
 
+// main entry point for app
 component main App {
-    state enable: boolean = true
+    // defining state
+    state EnableForm = true
+    // mounted event
     @mounted accounts.load, FadeIn
-    MyForm {
-        @enabled = enable;
-    }
+    // child component
+    MyForm { @EnableForm }
 }
 
-component MyForm {
-	prop enabled?: boolean = true
+// conditional rendering
+component ConditionalChild {
+    state ShowText = false
+    // Inline is supported
+    if (ShowText) Text { "Hello world" @Moniker @bold }
+}
+
+component MyForm  {
+	prop EnableForm? boolean = true
+    // components accept styles (FormContainerStyle)
     Container FormContainerStyle {  
         Input InputStyle {
+            // component props can be passed with @ notation
             @email "Email Here"
-            @state Auth.CREDS.email
-            Icon {
-                @svg "email"
-                @size 22
-            }
+            @value Auth.CREDS.email
+            @disabled !EnableForm
+            // Inline is supported
+            Icon { @svg "email" @size 22 }
         }
         Input InputStyle {
+            // boolean props are inferred for shorthand
             @password
-            @state Auth.CREDS.password
+            @value Auth.CREDS.password
+            @disabled !EnableForm
+            // keypress listeners 
+            @key:enter MyButton.onPress()
         }
-        Button {
-            style padding: 10 20, center, grow, background: theme.background
+        // arrow syntax decalares a ref 
+        Button->MyButton SubmitStyle {
             @text "Submit"
-            @action wait if (enabled) Auth.CREDS.email
+            @onPress Auth.CREDS.email
             if (waiting) Spinner SpinnerStyle {}
         }
+
+        // Concept for switch case components
+        MyComponent MyStyle {
+            prop MyProp string = "JeffComponent"
+            switch MyProp
+                case "JeffComponent" 
+                JeffComponent JeffStyle {
+                    @someProp true
+                }
+                case "MemeComponent" 
+                MemeComponent MemeStyle {}
+        }
 	}
+}
+
+style SubmitStyle {
+    padding: 10 20, 
+    center, 
+    grow, 
+    background: theme.background
 }
 
 style FormContainerStyle {
@@ -47,9 +80,9 @@ style InputStyle {
 }
 
 animation FadeIn {
-    @duration = 200
-    @frame opacity = 0
-    @frame opacity = 1
+    @duration 200
+    @frame opacity 0
+    @frame opacity 1
 }
 
 
