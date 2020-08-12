@@ -15,10 +15,11 @@ component main App {
 component ConditionalChild {
     state ShowText = false
     // Inline is supported
-    if (ShowText) Text { "Hello world" @Moniker @bold }
+    if ShowText
+    Text { "Hello world" @Moniker @bold }
 }
 
-component MyForm  {
+component MyForm {
 	prop EnableForm? boolean = true
     // components accept styles (FormContainerStyle)
     Container FormContainerStyle {  

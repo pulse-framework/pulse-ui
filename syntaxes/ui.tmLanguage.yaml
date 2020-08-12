@@ -18,14 +18,14 @@ patterns:
     captures:
       '0': { name: constant.numeric }
 
-      # Component Name
+  # Component Name
   - name: component.block.ui
     begin: ([A-Z][a-zA-Z]+).+{
     end: \s
     captures:
       '1': { name: entity.name.function }
 
-# State Name
+  # State Name
   - name: component.block.ui
     begin: ([A-Z][A-Z]+)
     end: \s
