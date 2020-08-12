@@ -66,12 +66,12 @@
       }
     },
     {
-      "name": "component.wait.ui",
-      "begin": "(waiting|wait)",
+      "name": "function.call.ui",
+      "begin": "([a-zA-Z]+)\\(\\)",
       "end": "\\s",
       "captures": {
-        "0": {
-          "name": "entity.name.class"
+        "1": {
+          "name": "entity.name.function"
         }
       }
     },

@@ -39,22 +39,25 @@ patterns:
     captures:
       '0': { name: keyword.control.ui }
 
-
-
-
   # Component Input
   - name: component.input.ui
     begin: (@[a-zA-Z]+)
     end: \s
     captures:
       '0': { name: entity.name.class }
-
-  # Wait
-  - name: component.wait.ui
-    begin: (waiting|wait)
+  # Function calls
+  - name: function.call.ui
+    begin: ([a-zA-Z]+)\(\)
     end: \s
     captures:
-      '0': { name: entity.name.class }
+      '1': { name: entity.name.function }
+
+  # # Wait
+  # - name: component.await.ui
+  #   begin: (waiting|await)
+  #   end: \s
+  #   captures:
+  #     '0': { name: entity.name.class }
 
 
  # Integers

@@ -1,5 +1,5 @@
-use component Container, Input, Button, Icon
-use controllers Auth, Accounts 
+use pulse::component { Container, Input, Button, Icon, Text, Logo }
+use core::controller { Auth, Accounts }
 
 // main entry point for app
 component main App {
@@ -18,7 +18,6 @@ component ConditionalChild {
     if ShowText
     Text { "Hello world" @Moniker @bold }
 }
-
 component MyForm {
 	prop EnableForm? boolean = true
     // components accept styles (FormContainerStyle)
@@ -70,7 +69,7 @@ style SubmitStyle {
 style FormContainerStyle {
     margin: 5 mobile(0) tablet(3)
     maxWidth: 200
-    shadow: 0, 0, 200 theme.shadow
+    shadow: 0 0 200 theme.shadow
     spaceBetween: 10
 }
 
